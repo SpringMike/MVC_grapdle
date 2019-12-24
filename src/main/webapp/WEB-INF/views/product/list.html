@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link href="/styles/style.css" th:href="@{/styles/style.css}" rel="stylesheet">
+    <style>
+        .detail{
+            display: block;
+            width: 105px;
+            height: 30px;
+            background-color: blue;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        .product-item {margin-top: 65px;}
+    </style>
+
+</head>
+<body>
+<h1 class="title">Products List</h1>
+<form th:action="@{search}">
+    <input type="text" name="txtSearch" id="txtSearch">
+    <input type="submit" th:value="Search">
+</form>
+<div>
+    <div th:each="product,iterStat : ${products}" th:class="${iterStat.odd}? 'odd'">
+        <div class="product-item">
+            <p th:text="${product.name}"></p>
+            <img width="150px" height="150px" th:src="@{'/i/' + ${product.image}}">
+            <p><a class="detail" th:href="@{product-detail/__${product.id}__}">View Detail</a></p>
+            <p><a class="detail" th:href="@{product-delete/__${product.id}__}"> Delete</a></p>
+            <p><a class="detail" th:href="@{edit-product/__${product.id}__}"> Edit</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
